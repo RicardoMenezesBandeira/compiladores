@@ -13,12 +13,14 @@ def p_exp(p):
     '''EXP : PARAMETRO EXP_L1
            | LPAREN PARAMETRO EXP_L2 RPAREN '''
     print(f"Expressão: {p[1]}")
+def p_programa(p):
+    '''PROGRAMA : BEGIN INSTRUCOES END'''
+    print("Bloco de código iniciado e finalizado.")
 def p_parametro(p):
     '''PARAMETRO : ID'''
-    
 def p_empty(p):
-    '''empty : semiCollum 
-             | RPAREN '''
+    '''empty :'''
+    pass
 def p_exp_l1(p):
     '''EXP_L1 : EXP OP_LOGICO EXP
               | empty'''
@@ -64,7 +66,22 @@ def p_op_comp(p):
                | LTE
                | GTE'''
     p[0] = p[1]
+def p_instrucoes(p):
+    '''INSTRUCOES : INSTRUCAO INSTRUCOES
+                  | INSTRUCAO'''
+    print(f"Instrução: {p[1]}")
 
+def p_instrucao(p):
+    '''INSTRUCAO : COMANDO
+                | VARIAVEL
+                | EXPRESSAO'''
+    print(f"Comando: {p[1]}")
+
+def p_comando(p):
+    '''COMANDO : ID ASSIGN EXP
+               | IF EXP THEN INSTRUCOES END
+               | WHILE EXP DO INSTRUCOES END'''
+    print(f"Comando: {p[1]}")
 # Erro de sintaxe
 def p_error(p):
     print(f"Erro de sintaxe: {p}")

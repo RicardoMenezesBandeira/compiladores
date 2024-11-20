@@ -1,1 +1,95 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NUMBER
+    semiCollum
+
+Grammar
+
+Rule 0     S' -> EXP
+Rule 1     EXP -> PARAMETRO EXP_L1
+Rule 2     EXP -> LPAREN PARAMETRO EXP_L2 RPAREN
+Rule 3     PROGRAMA -> BEGIN INSTRUCOES END
+Rule 4     PARAMETRO -> ID
+Rule 5     empty -> <empty>
+Rule 6     EXP_L1 -> EXP OP_LOGICO EXP
+Rule 7     EXP_L1 -> empty
+Rule 8     EXP_L2 -> EXP OP_MAT EXP
+Rule 9     EXP_L2 -> empty
+Rule 10    PARAM_LOGICO -> EXP_LOGICO
+Rule 11    PARAM_LOGICO -> OP_LOGICO EXP
+Rule 12    PARAM_LOGICO -> PARAM_LOGICO comma EXP_LOGICO
+Rule 13    EXP_LOGICO -> OP_LOGICO EXP
+Rule 14    EXP_LOGICO -> empty
+Rule 15    OP_MAT -> PLUS
+Rule 16    OP_MAT -> MINUS
+Rule 17    OP_MAT -> TIMES
+Rule 18    OP_MAT -> DIVIDE
+Rule 19    OP_LOGICO -> AND
+Rule 20    OP_LOGICO -> OR
+Rule 21    OP_LOGICO -> NOT
+Rule 22    OP_COMP -> EQ
+Rule 23    OP_COMP -> NEQ
+Rule 24    OP_COMP -> LT
+Rule 25    OP_COMP -> GT
+Rule 26    OP_COMP -> LTE
+Rule 27    OP_COMP -> GTE
+Rule 28    INSTRUCOES -> INSTRUCAO INSTRUCOES
+Rule 29    INSTRUCOES -> INSTRUCAO
+Rule 30    INSTRUCAO -> COMANDO
+Rule 31    INSTRUCAO -> VARIAVEL
+Rule 32    INSTRUCAO -> EXPRESSAO
+Rule 33    COMANDO -> ID ASSIGN EXP
+Rule 34    COMANDO -> IF EXP THEN INSTRUCOES END
+Rule 35    COMANDO -> WHILE EXP DO INSTRUCOES END
+
+Terminals, with rules where they appear
+
+AND                  : 19
+DIVIDE               : 18
+EQ                   : 22
+GT                   : 25
+GTE                  : 27
+ID                   : 4 33
+LPAREN               : 2
+LT                   : 24
+LTE                  : 26
+MINUS                : 16
+NEQ                  : 23
+NOT                  : 21
+NUMBER               : 
+OR                   : 20
+PLUS                 : 15
+RPAREN               : 2
+TIMES                : 17
+comma                : 12
+error                : 
+semiCollum           : 
+
+Nonterminals, with rules where they appear
+
+ASSIGN               : 33
+BEGIN                : 3
+COMANDO              : 30
+DO                   : 35
+END                  : 3 34 35
+EXP                  : 6 6 8 8 11 13 33 34 35 0
+EXPRESSAO            : 32
+EXP_L1               : 1
+EXP_L2               : 2
+EXP_LOGICO           : 10 12
+IF                   : 34
+INSTRUCAO            : 28 29
+INSTRUCOES           : 3 28 34 35
+OP_COMP              : 
+OP_LOGICO            : 6 11 13
+OP_MAT               : 8
+PARAMETRO            : 1 2
+PARAM_LOGICO         : 12
+PROGRAMA             : 
+THEN                 : 34
+VARIAVEL             : 31
+WHILE                : 35
+empty                : 7 9 14
+
