@@ -2,8 +2,8 @@ import ply.lex as lex
 
 # Lista de tokens (incluindo palavras-chave)
 tokens = [
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
-    'Less', 'great', 'equal', 'NEqual', 'GoE', 'LoE', 
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN', 'equal', 'NEqual', 'GoE', 'LoE',
+    'Less', 'great', 
     'Ecou', 'Dcou', 'collum', 'semiCollum', 'comma', 'atri','atri2','acess', 'ID', 'NUMBER'
 ] + [
     'BEGIN', 'END', 'WHILE', 'IF', 'ELSE', 'VAR', 'OF', 'WRITE', 'READ',
@@ -38,6 +38,7 @@ keywords = {
     'or': 'OR',
     'true': 'TRUE',
     'false': 'FALSE'
+    
 }
 
 # Expressões regulares para os tokens
@@ -47,20 +48,20 @@ t_TIMES   = r'\^'
 t_DIVIDE  = r'/'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
+t_equal   = r'=='        # Operador de igualdade
+t_NEqual  = r'\!='       # Operador de diferença
+t_GoE     = r'>='        # Maior ou igual
+t_LoE     = r'<='        # Menor ou igual
 t_Less    = r'<'
 t_great   = r'>'
-t_equal   = r'=='
-t_NEqual  = r'\!='
-t_GoE     = r'>='
-t_LoE     = r'<='
 t_Ecou    = r'\['
 t_Dcou    = r'\]'
-t_collum  = r'\:'
 t_semiCollum = r';'
 t_comma   = r'\,'
-t_atri    = r'\:\='
-t_atri2   = r'\='
-t_acess  =r'\.'
+t_atri2   = r':='        
+t_acess   = r'\.'
+t_atri    = r'\='    
+t_collum  = r'\:'
 
 # Expressão regular para números (inteiros e reais)
 def t_NUMBER(t):
@@ -84,8 +85,10 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 # Regra para lidar com erros
+lexical_errors = []
 def t_error(t):
-    print(f"Caractere ilegal '{t.value[0]}'")
+    print(f"Caractere ilegal '{t.value[0]},na linha: {t.lexer.lineno}'")
+    lexical_errors.append(f"Caractere ilegal '{t.value[0]},na linha: {t.lexer.lineno}'")
     t.lexer.skip(1)
 # Criar a instância do lexer
 lexer = lex.lex()
@@ -98,6 +101,6 @@ def tolkenizando(script):
         tok = lexer.token()  # Obter o próximo token
         if not tok:
             break  # Quando nenhum token é encontrado, encerra.
-        print(tok)
+        #print(tok)
         listaTolkens.append(tok)
     return listaTolkens
